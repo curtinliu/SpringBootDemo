@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiaour.spring.boot.mapper.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.xiaour.spring.boot.entity.UserInfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="age" property="age" jdbcType="VARCHAR" />
+<mapper namespace="com.xiaour.spring.boot.mapper.UserInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.xiaour.spring.boot.entity.UserInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate"
+			jdbcType="TIMESTAMP" />
+		<result column="create_User" property="createUser"
+			jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate"
+			jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser"
+			jdbcType="VARCHAR" />
 
-  </resultMap>
+	</resultMap>
 
 
-  
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select * from user_info where id = #{id,jdbcType=INTEGER}
-  </select>
-  
- 
+<!-- 	查询所有用户信息 -->
+	<select id="selectAllUserInfo" resultMap="BaseResultMap">
+		select * from user_info 
+	</select>
+	
+<!-- 	通过id查询用户信息 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select * from user_info where id =
+		#{id,jdbcType=INTEGER}
+	</select>
+
+
+	<insert id="addUserInfo">
+		INSERT INTO user_info (name, age,
+		create_date,
+		create_user, update_date, update_user)
+		VALUES
+		(#{name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{createDate,jdbcType=TIMESTAMP},#{createUser,jdbcType=VARCHAR},#{updateDate,jdbcType=TIMESTAMP},#{updateUser,jdbcType=VARCHAR});
+	</insert>
+
 
 </mapper>

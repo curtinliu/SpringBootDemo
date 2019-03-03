@@ -2,16 +2,19 @@
 server :  
   port :  8080
 
-#数据库配置
+#数据库配置  &autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+#?useUnicode=true&characterEncoding=utf-8#&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://192.168.2.5:3335/test_data?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
-        username: root
-        password: chifaner159
+        #serverTimezone=GMT%2B8  设置时区：东八区
+        url: jdbc:mysql://192.168.0.105:3306/mysql_db?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+        username: dev
+        password: dev
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        #driver-class-name: com.mysql.jdbc.Driver 新的驱动会报错
+        driver-class-name: com.mysql.cj.jdbc.Driver
         filters: stat
         maxActive: 20
         initialSize: 1
@@ -41,7 +44,8 @@ mybatis:
     
 # 日志输出
 logging: 
-    file: D:/boot.log
+    #file: D:/boot.log
+    file: /Users/curtin/Library/Log/SpringBootDemoLog.log
     level: 
         com.ibatis:DEBUG
         root:DEBUG
